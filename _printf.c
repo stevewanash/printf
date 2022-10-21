@@ -3,6 +3,12 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+/**
+ * _printf - prints out anything
+ * @format: a pointer to an array of characters
+ * 
+ * Return: The number of bytes printed
+ */
 int _printf(const char *format, ...)
 {
     int i = 0;
