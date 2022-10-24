@@ -1,104 +1,71 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include <stdarg.h>
 
-/**
- * _printf - prints out anything
- * @format: a pointer to an array of characters
- * 
- * Return: The number of bytes printed
- */
 int _printf(const char *format, ...)
 {
     int i = 0;
 
-    char *j;
-
-    j = malloc(100);
-
-    /*char k = 0;
-
-    char *l;
-
-    l = malloc(100);
-
-
     va_list ap;
 
     va_start(ap, format);
-    
-    while (k < format)
-    {
-        l = va_arg(ap, int);*/
 
     while (format[i])
     {
+        /*if (format[i] == '%' && format[i + 1] == 'd')
+        {
+            putchar(va_arg(ap, int) + '0');
+            s[n] = va_arg(ap, int) + '0';
+            del(s, n - 1);
+            i+=2;
+            i++;
+            continue;*/
         if (format[i] == '%')
         {
-            if (format[i + 1] == ' ')
-            {
-                j[i] = format[i];
 
-                i++;                
-                /*if (format [i + 1] == 'c')
-                {
-                    
-                }
-                else if (format [i + 1] == 's')
-                {
-                    
-                }
-                if (format [i + 1] == 'd')
-                {
-                    
-                }
-                if (format [i + 1] == 'f')
-                {
-                    
-                }
-                if (format [i + 1] == 'd')
-                {
-                    
-                }*/
-            }
-            else if (!(format [i + 1]))
+            switch(format[i + 1])
             {
-                return (-1);
+                case 'd':
+                    putchar(va_arg(ap, int) + '0');
+                    /*s[n] = va_arg(ap, int) + '0';
+                    del(s, n - 1);*/
+                    i+=2;
+                    //i++;
+                    continue;
+                case 'i':
+                    putchar(va_arg(ap, int) + '0');
+                    i+=2;
+                    continue;
+                case 'c':
+                    putchar(va_arg(ap, int));
+                    i+= 2;
+                    continue;
+                /*case 's':
+                    putchar(va_arg(ap, int));
+                    i+=2;
+                    continue;
+                    /*buffer = va_arg(ap, int);
+
+                    while (s[n])
+                    {
+                        putchar(s[n]);
+                        n++;
+                    }*/                 
+                default:
+                    break; 
             }
-            /*else
-            {
-                write (1, '%', 1);
-            }*/
         }
-        /*else if (format [i] == '\\')
-        {
-            if (format [i + 1] != ' ' && format [i + 1] != '\0' )
-            {
-                if (format [i + 1] == 'n')
-                {
-
-                }
-                else if (format [i + 1] == 't')
-                {
-                    
-                }
-                /*else
-                {
-                
-                }
-            }
-        }*/
+        //}
         else
-        {
-            j[i] = format[i];
+            putchar(format[i]);
+            /*s[n] = format[i];
 
-            i++;
-        }
+        n++;*/
+        i++;
     }
+    //printf("%d\n", i);
+    //write(1, s, i);
 
-    write(1, j, i);
-
-    free(j);
+    va_end(ap);
 
     return (i);
 }
